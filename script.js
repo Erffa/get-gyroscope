@@ -1,31 +1,21 @@
 window.onload = () => {
+    
     console.log("onload");
 
     const
+    button = document.getElementById('button'),
     text = document.getElementById("text");
 
-
-    try {
-        window.addEventListener(
-            "deviceorientation", 
-            (event) => {
-                var 
-                absolute = event.absolute,
-                alpha    = event.alpha,
-                beta     = event.beta,
-                gamma    = event.gamma;
-
-                let msg = 
-                "absolute : " + absolute + "<br>" + 
-                "alpha : " + alpha + "<br>" + 
-                "beta : " + beta + "<br>" + 
-                "gamma : " + gamma + "<br>" + 
-                
-                console.log(msg);
-            }, 
-            true);
-    }
-    catch (err) {
-        text.innerHTML = "error deviceorientation";
-    }
+    button.onclick = () => {
+        var variable = undefined;
+        
+        window.addEventListener( 'deviceorientation', (event) => { variable = event.alpha; } , true );
+        
+        if (variable === undefined) {
+            text.innerHTML = "error : maybe orientation doesn't work";
+        }
+        else {
+            text.innerHTML = "result : " + variable;
+        }
+    };
 }
